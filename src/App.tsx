@@ -10,6 +10,7 @@ import Exercise from "./pages/Exercise";
 import WebBuilder from "./pages/WebBuilder";
 import Settings from "./pages/Settings";
 import DevPanel from "./pages/DevPanel";
+import NotFound from "./pages/NotFound";
 
 // Garde : redirige vers l'onboarding tant qu'aucun prénom n'est saisi.
 function RequireUser({ children }: { children: React.ReactNode }) {
@@ -88,7 +89,7 @@ export default function App() {
             </RequireUser>
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
