@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Module from "./pages/Module";
 import Lesson from "./pages/Lesson";
 import Exercise from "./pages/Exercise";
+import WebBuilder from "./pages/WebBuilder";
 import Settings from "./pages/Settings";
 
 // Garde : redirige vers l'onboarding tant qu'aucun prénom n'est saisi.
@@ -59,6 +60,14 @@ export default function App() {
           element={
             <RequireUser>
               <Exercise />
+            </RequireUser>
+          }
+        />
+        <Route
+          path="/builder/:moduleId/:lessonId"
+          element={
+            <RequireUser>
+              <WebBuilder />
             </RequireUser>
           }
         />

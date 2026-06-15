@@ -13,6 +13,10 @@ import l10 from "./10-html";
 import l11 from "./11-css";
 import l12 from "./12-js";
 import l13 from "./13-projet";
+import l14 from "./14-page-complete";
+import l15 from "./15-styliser";
+import l16 from "./16-responsive";
+import l17 from "./17-mon-site";
 import d01 from "./docker-01-cest-quoi";
 import d02 from "./docker-02-images-conteneurs";
 import d03 from "./docker-03-commandes";
@@ -32,6 +36,10 @@ export const LESSONS: Lesson[] = [
   l11,
   l12,
   l13,
+  l14,
+  l15,
+  l16,
+  l17,
   d01,
   d02,
   d03,
@@ -46,7 +54,13 @@ export function getLesson(lessonId: string): Lesson | undefined {
   return LESSON_MAP[lessonId];
 }
 
-// Une leçon est un "projet" (exercice libre) si elle n'a pas de quiz mais un exerciseId.
+// Une leçon est un "projet" (exercice libre de code) si elle n'a pas de quiz
+// mais un exerciseId.
 export function isProjectLesson(lesson: Lesson): boolean {
   return lesson.quiz.length === 0 && !!lesson.exerciseId;
+}
+
+// Une leçon est un "atelier site web" si elle embarque un webBuilder.
+export function isBuilderLesson(lesson: Lesson): boolean {
+  return !!lesson.webBuilder;
 }

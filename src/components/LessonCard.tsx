@@ -5,10 +5,11 @@ import {
   Circle,
   Code2,
   ChevronRight,
+  Globe,
 } from "lucide-react";
 import type { Lesson } from "../types";
 import { useProgress } from "../store/useProgress";
-import { isProjectLesson } from "../data/lessons";
+import { isProjectLesson, isBuilderLesson } from "../data/lessons";
 
 function formatDate(iso: string): string {
   try {
@@ -33,10 +34,13 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
     (s) => s.progress.modules[lesson.moduleId]?.lessons[lesson.id],
   );
   const isProject = isProjectLesson(lesson);
+  const isBuilder = isBuilderLesson(lesson);
 
-  const to = isProject
-    ? `/exercise/${lesson.moduleId}/${lesson.id}`
-    : `/lesson/${lesson.moduleId}/${lesson.id}`;
+  const to = isBuilder
+    ? `/builder/${lesson.moduleId}/${lesson.id}`
+    : isProject
+      ? `/exercise/${lesson.moduleId}/${lesson.id}`
+      : `/lesson/${lesson.moduleId}/${lesson.id}`;
 
   const statusIcon = !unlocked ? (
     <Lock className="h-5 w-5 text-slate-400" />
@@ -57,10 +61,16 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">
           <h3 className="truncate font-semibold">{lesson.title}</h3>
-          {isProject && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-0.5 text-xs font-semibold text-violet-700 dark:bg-violet-500/10 dark:text-violet-300">
-              <Code2 className="h-3 w-3" /> Projet
+          {isBuilder ? (
+            <span className="inline-flex items-center gap-1 rounded-full bg-pink-50 px-2 py-0.5 text-xs font-semibold text-pink-700 dark:bg-pink-500/10 dark:text-pink-300">
+              <Globe className="h-3 w-3" /> Site
             </span>
+          ) : (
+            isProject && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-violet-50 px-2 py-0.5 text-xs font-semibold text-violet-700 dark:bg-violet-500/10 dark:text-violet-300">
+                <Code2 className="h-3 w-3" /> Projet
+              </span>
+            )
           )}
         </div>
         <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
@@ -68,7 +78,7 @@ export default function LessonCard({ lesson }: { lesson: Lesson }) {
           {completed && lp && (
             <>
               {" · "}
-              {isProject ? "Terminé" : `Score ${lp.score}%`}
+              {isProject || isBuilder ? "Terminé" : `Score ${lp.score}%`}
               {lp.completedAt && ` · ${formatDate(lp.completedAt)}`}
             </>
           )}

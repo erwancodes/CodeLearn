@@ -33,11 +33,24 @@ export const MODULES: ModuleDef[] = [
     lessonIds: ["10-html", "11-css", "12-js", "13-projet"],
   },
   {
+    id: "module-4",
+    title: "Crée ton site web",
+    description:
+      "Construis ta propre page web en HTML et CSS, avec un aperçu en direct. Pensé pour bien s'afficher sur mobile (iPhone inclus).",
+    order: 4,
+    lessonIds: [
+      "14-page-complete",
+      "15-styliser",
+      "16-responsive",
+      "17-mon-site",
+    ],
+  },
+  {
     id: "module-special",
     title: "Module Spécial : Docker",
     description:
       "Docker expliqué tout simplement : mets une appli dans une boîte qui marche partout. Accessible à tout moment, aucune base requise.",
-    order: 4,
+    order: 5,
     special: true,
     lessonIds: [
       "docker-01-cest-quoi",

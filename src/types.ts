@@ -22,6 +22,13 @@ export type CodeSample = {
   output: string;
 };
 
+export type WebBuilderSpec = {
+  title: string;
+  statement: string; // Énoncé / consignes (markdown léger)
+  html: string; // Code HTML de départ
+  css: string; // Code CSS de départ
+};
+
 export type Lesson = {
   id: string;
   moduleId: string;
@@ -35,6 +42,7 @@ export type Lesson = {
   examples?: CodeSample[]; // Exemples supplémentaires (optionnel)
   quiz: QuizQuestion[];
   exerciseId?: string;
+  webBuilder?: WebBuilderSpec; // Si présent : leçon "atelier site web" (aperçu live)
 };
 
 export type Exercise = {

@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Lightbulb, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { getModule } from "../data/modules";
-import { getLesson, isProjectLesson } from "../data/lessons";
+import { getLesson, isProjectLesson, isBuilderLesson } from "../data/lessons";
 import { useProgress } from "../store/useProgress";
 import Markdown from "../components/Markdown";
 import ExampleBlock from "../components/ExampleBlock";
@@ -34,6 +34,10 @@ export default function Lesson() {
       : null;
   }, [mod, lessonId]);
 
+  // Leçon "atelier site web" → rediriger vers le builder.
+  if (lesson && isBuilderLesson(lesson)) {
+    return <Navigate to={`/builder/${moduleId}/${lessonId}`} replace />;
+  }
   // Leçon "projet" → rediriger vers la page exercice.
   if (lesson && isProjectLesson(lesson)) {
     return <Navigate to={`/exercise/${moduleId}/${lessonId}`} replace />;
@@ -69,7 +73,9 @@ export default function Lesson() {
   const goNext = () => {
     if (nextLessonId) {
       const nextLesson = getLesson(nextLessonId);
-      if (nextLesson && isProjectLesson(nextLesson)) {
+      if (nextLesson && isBuilderLesson(nextLesson)) {
+        navigate(`/builder/${moduleId}/${nextLessonId}`);
+      } else if (nextLesson && isProjectLesson(nextLesson)) {
         navigate(`/exercise/${moduleId}/${nextLessonId}`);
       } else {
         navigate(`/lesson/${moduleId}/${nextLessonId}`);
