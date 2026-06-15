@@ -10,10 +10,13 @@ import {
   RotateCcw,
   CheckCircle2,
   Unlock,
+  Lock,
+  LogOut,
 } from "lucide-react";
 import { useProgress } from "../store/useProgress";
 import { MODULES } from "../data/modules";
 import { getLevel } from "../utils/levels";
+import { checkDevPassword, isDevUnlocked, lockDev } from "../utils/devAuth";
 
 export default function DevPanel() {
   const totalXP = useProgress((s) => s.progress.totalXP);
@@ -30,7 +33,75 @@ export default function DevPanel() {
   const [xpInput, setXpInput] = useState("100");
   const [streakInput, setStreakInput] = useState("7");
 
+  // --- verrou mot de passe ---
+  const [unlocked, setUnlocked] = useState(isDevUnlocked());
+  const [pwd, setPwd] = useState("");
+  const [error, setError] = useState(false);
+  const [checking, setChecking] = useState(false);
+
   const level = getLevel(totalXP);
+
+  const submitPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setChecking(true);
+    const ok = await checkDevPassword(pwd);
+    setChecking(false);
+    if (ok) {
+      setUnlocked(true);
+      setError(false);
+    } else {
+      setError(true);
+      setPwd("");
+    }
+  };
+
+  // Écran de saisie du mot de passe (tant que non déverrouillé).
+  if (!unlocked) {
+    return (
+      <main className="flex min-h-[80vh] items-center justify-center px-4">
+        <form onSubmit={submitPassword} className="card w-full max-w-sm p-6">
+          <div className="mb-4 flex flex-col items-center text-center">
+            <span className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-fuchsia-100 text-fuchsia-600 dark:bg-fuchsia-500/15 dark:text-fuchsia-300">
+              <Lock className="h-7 w-7" />
+            </span>
+            <h1 className="text-xl font-bold">Panneau dev protégé</h1>
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Cette zone est réservée. Entre le mot de passe pour continuer.
+            </p>
+          </div>
+
+          <input
+            type="password"
+            value={pwd}
+            onChange={(e) => setPwd(e.target.value)}
+            placeholder="Mot de passe"
+            autoFocus
+            className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-fuchsia-500 focus:ring-2 focus:ring-fuchsia-500/30 dark:border-slate-700 dark:bg-slate-800"
+          />
+          {error && (
+            <p className="mt-2 text-sm font-medium text-red-600">
+              Mot de passe incorrect.
+            </p>
+          )}
+
+          <button
+            type="submit"
+            disabled={!pwd || checking}
+            className="btn bg-fuchsia-600 text-white hover:bg-fuchsia-700 mt-4 w-full"
+          >
+            {checking ? "Vérification…" : "Déverrouiller"}
+          </button>
+
+          <Link
+            to="/dashboard"
+            className="mt-3 block text-center text-sm text-slate-400 hover:text-slate-600"
+          >
+            Retour au tableau de bord
+          </Link>
+        </form>
+      </main>
+    );
+  }
 
   const unlockUpToModule4 = () => {
     // Compléter les modules 1 à 3 pour débloquer le module 4.
@@ -50,6 +121,18 @@ export default function DevPanel() {
       <div className="mb-2 flex items-center gap-2">
         <Wand2 className="h-7 w-7 text-fuchsia-500" />
         <h1 className="text-3xl font-bold">Panneau dev</h1>
+        <button
+          onClick={() => {
+            lockDev();
+            setUnlocked(false);
+            setPwd("");
+          }}
+          className="btn-ghost ml-auto !py-1.5 !text-xs"
+          title="Verrouiller le panneau"
+        >
+          <LogOut className="h-4 w-4" />
+          Verrouiller
+        </button>
       </div>
       <p className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-500/20 dark:bg-amber-500/10 dark:text-amber-200">
         ⚠️ Mode triche local : tout est stocké dans le navigateur (localStorage).

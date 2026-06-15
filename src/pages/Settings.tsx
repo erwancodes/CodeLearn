@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Moon, Sun, Trash2, User, Check, Wand2 } from "lucide-react";
+import { ArrowLeft, Moon, Sun, Trash2, User, Check } from "lucide-react";
 import { useProgress } from "../store/useProgress";
 
 export default function Settings() {
@@ -86,25 +86,6 @@ export default function Settings() {
             Sombre
           </button>
         </div>
-      </section>
-
-      {/* Panneau dev / triche */}
-      <section className="card mb-5 border-fuchsia-200 p-5 dark:border-fuchsia-500/20">
-        <h2 className="mb-2 flex items-center gap-2 font-bold text-fuchsia-600 dark:text-fuchsia-400">
-          <Wand2 className="h-5 w-5" />
-          Panneau dev
-        </h2>
-        <p className="mb-3 text-sm text-slate-500 dark:text-slate-400">
-          Outils de test : gagner de l'XP, débloquer et compléter des modules
-          instantanément. Pratique pour tester l'app.
-        </p>
-        <Link
-          to="/dev"
-          className="btn bg-fuchsia-600 text-white hover:bg-fuchsia-700"
-        >
-          <Wand2 className="h-4 w-4" />
-          Ouvrir le panneau dev
-        </Link>
       </section>
 
       {/* Réinitialisation */}
