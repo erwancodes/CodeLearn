@@ -11,6 +11,7 @@ import WebBuilder from "./pages/WebBuilder";
 import Settings from "./pages/Settings";
 import DevPanel from "./pages/DevPanel";
 import NotFound from "./pages/NotFound";
+import Landing from "./pages/Landing";
 
 // Garde : redirige vers l'onboarding tant qu'aucun prénom n'est saisi.
 function RequireUser({ children }: { children: React.ReactNode }) {
@@ -33,6 +34,8 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Onboarding />} />
+        <Route path="/landing" element={<Landing />} />
+        <Route path="/welcome" element={<Landing />} />
         <Route
           path="/dashboard"
           element={

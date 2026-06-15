@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import { Code2, ArrowRight } from "lucide-react";
 import { useProgress } from "../store/useProgress";
 
@@ -62,6 +62,16 @@ export default function Onboarding() {
             ordinateur.
           </p>
         </form>
+
+        <p className="mt-5 text-center text-sm text-slate-400">
+          Curieux d'en savoir plus ?{" "}
+          <Link
+            to="/landing"
+            className="font-semibold text-brand-600 hover:underline dark:text-brand-400"
+          >
+            Découvrir CodeLearn
+          </Link>
+        </p>
       </div>
     </div>
   );

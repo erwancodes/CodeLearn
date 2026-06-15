@@ -11,8 +11,9 @@ export default function Navbar() {
   const totalXP = useProgress((s) => s.progress.totalXP);
   const streak = useProgress((s) => s.progress.streak);
 
-  // On masque la navbar pendant l'onboarding.
-  if (!username || pathname === "/" || pathname === "/onboarding") return null;
+  // On masque la navbar pendant l'onboarding et sur la landing.
+  const hiddenPaths = ["/", "/onboarding", "/landing", "/welcome"];
+  if (!username || hiddenPaths.includes(pathname)) return null;
 
   const level = getLevel(totalXP);
 

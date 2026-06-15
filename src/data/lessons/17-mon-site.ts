@@ -36,7 +36,7 @@ Clique sur **Ouvrir l'atelier** pour commencer.`,
 
 Ton travail est **sauvegardé automatiquement**. Quand tu es fier du résultat, clique sur « Marquer comme terminé ».`,
     html: `<div class="carte">
-  <h1>Salut, moi c'est Alex 👋</h1>
+  <h1>Salut, moi c'est Tibo 👋</h1>
   <p class="sous-titre">15 ans · apprenti développeur</p>
 
   <h2>Ce que j'aime</h2>
