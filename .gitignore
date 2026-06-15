@@ -4,6 +4,15 @@ dist-ssr
 *.local
 .vite
 
+# Artefacts de build TypeScript (tsc -b)
+*.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Autres gestionnaires de paquets (on utilise npm)
+pnpm-lock.yaml
+yarn.lock
+
 # Logs
 logs
 *.log
