@@ -17,6 +17,11 @@ import l14 from "./14-page-complete";
 import l15 from "./15-styliser";
 import l16 from "./16-responsive";
 import l17 from "./17-mon-site";
+import l18 from "./18-flexbox";
+import l19 from "./19-boutons-hover";
+import l20 from "./20-cartes-degrades";
+import l21 from "./21-animations";
+import l22 from "./22-projet-portfolio";
 import d01 from "./docker-01-cest-quoi";
 import d02 from "./docker-02-images-conteneurs";
 import d03 from "./docker-03-commandes";
@@ -40,6 +45,11 @@ export const LESSONS: Lesson[] = [
   l15,
   l16,
   l17,
+  l18,
+  l19,
+  l20,
+  l21,
+  l22,
   d01,
   d02,
   d03,

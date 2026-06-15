@@ -16,14 +16,15 @@ sauvegardée dans le navigateur (`localStorage`). L'app fonctionne hors ligne
 
 ## ✨ Fonctionnalités
 
-- **4 modules progressifs** — Les bases (variables, conditions, boucles, fonctions),
+- **5 modules progressifs** — Les bases (variables, conditions, boucles, fonctions),
   Structures de données (listes, dictionnaires, fichiers), le Web (HTML, CSS, JS),
-  et **Crée ton site web** (atelier HTML/CSS avec aperçu en direct).
+  **Crée ton site web** (atelier HTML/CSS avec aperçu en direct), et
+  **Web avancé** (Flexbox, survol, dégradés, ombres, animations — que des ateliers).
 - **Module Spécial Docker** ★ — bonus toujours accessible, qui explique les conteneurs
   avec des analogies simples (compréhensible dès 15 ans).
 - **Atelier site web** — éditeurs HTML + CSS avec **aperçu en temps réel**, bascule
   **Bureau / Mobile (iPhone)** pour vérifier le rendu, sauvegarde automatique.
-- **21 leçons** avec concept, analogie, exemples de code colorés, résultat attendu et QCM.
+- **26 leçons** avec concept, analogie, exemples de code colorés, résultat attendu et QCM.
 - **Entièrement responsive**, pensé pour fonctionner aussi bien sur iPhone que sur ordinateur.
 - **Éditeur de code exécutable** : Python via [Pyodide](https://pyodide.org/),
   JavaScript en natif. Console de sortie avec gestion des erreurs.

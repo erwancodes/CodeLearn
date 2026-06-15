@@ -46,11 +46,25 @@ export const MODULES: ModuleDef[] = [
     ],
   },
   {
+    id: "module-5",
+    title: "Web avancé : du style qui claque",
+    description:
+      "Passe au niveau supérieur avec Flexbox, les effets au survol, les dégradés, les ombres et les animations CSS. Que des ateliers, aperçu en direct.",
+    order: 5,
+    lessonIds: [
+      "18-flexbox",
+      "19-boutons-hover",
+      "20-cartes-degrades",
+      "21-animations",
+      "22-projet-portfolio",
+    ],
+  },
+  {
     id: "module-special",
     title: "Module Spécial : Docker",
     description:
       "Docker expliqué tout simplement : mets une appli dans une boîte qui marche partout. Accessible à tout moment, aucune base requise.",
-    order: 5,
+    order: 6,
     special: true,
     lessonIds: [
       "docker-01-cest-quoi",

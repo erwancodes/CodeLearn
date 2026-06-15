@@ -6,7 +6,11 @@ export const LEVELS: Level[] = [
   { name: "Apprenti", min: 100, max: 299 },
   { name: "Junior", min: 300, max: 599 },
   { name: "Développeur", min: 600, max: 999 },
-  { name: "Senior", min: 1000, max: Infinity },
+  { name: "Senior", min: 1000, max: 1799 },
+  { name: "Expert", min: 1800, max: 2999 },
+  { name: "Architecte", min: 3000, max: 4499 },
+  { name: "Légende", min: 4500, max: 6999 },
+  { name: "Mythique", min: 7000, max: Infinity },
 ];
 
 export function getLevel(totalXP: number): Level {

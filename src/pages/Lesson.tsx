@@ -1,6 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, Lightbulb, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import {
+  ArrowLeft,
+  Lightbulb,
+  Sparkles,
+  CheckCircle2,
+  ArrowRight,
+} from "lucide-react";
 import { getModule } from "../data/modules";
 import { getLesson, isProjectLesson, isBuilderLesson } from "../data/lessons";
 import { useProgress } from "../store/useProgress";
@@ -18,8 +24,8 @@ export default function Lesson() {
   const unlocked = useProgress((s) => s.isLessonUnlocked(moduleId, lessonId));
   const completeLesson = useProgress((s) => s.completeLesson);
 
-  const [answers, setAnswers] = useState<(boolean | null)[]>(
-    () => (lesson ? lesson.quiz.map(() => null) : []),
+  const [answers, setAnswers] = useState<(boolean | null)[]>(() =>
+    lesson ? lesson.quiz.map(() => null) : [],
   );
   const [validated, setValidated] = useState(false);
   const [xpGained, setXpGained] = useState(0);
