@@ -5,7 +5,7 @@ import { getModule } from "../data/modules";
 import { getLesson, isProjectLesson } from "../data/lessons";
 import { useProgress } from "../store/useProgress";
 import Markdown from "../components/Markdown";
-import CodeViewer from "../components/CodeViewer";
+import ExampleBlock from "../components/ExampleBlock";
 import QuizBlock from "../components/QuizBlock";
 import XPBadge from "../components/XPBadge";
 
@@ -111,21 +111,19 @@ export default function Lesson() {
         </div>
       </section>
 
-      {/* 3. Exemple */}
+      {/* 3 + 4. Exemples (code + résultat attendu) */}
       <section className="mb-8">
-        <h2 className="mb-2 text-lg font-bold">Exemple</h2>
-        <CodeViewer
-          code={lesson.codeExample.code}
-          language={lesson.codeExample.language}
-        />
-      </section>
-
-      {/* 4. Résultat attendu */}
-      <section className="mb-8">
-        <h2 className="mb-2 text-lg font-bold">Résultat attendu</h2>
-        <pre className="code-block overflow-x-auto rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
-          {lesson.codeExample.output}
-        </pre>
+        <h2 className="mb-3 text-lg font-bold">
+          {lesson.examples && lesson.examples.length > 0
+            ? "Exemples"
+            : "Exemple"}
+        </h2>
+        <div className="space-y-6">
+          <ExampleBlock sample={lesson.codeExample} />
+          {lesson.examples?.map((ex, i) => (
+            <ExampleBlock key={i} sample={ex} />
+          ))}
+        </div>
       </section>
 
       {/* 5. Quiz */}

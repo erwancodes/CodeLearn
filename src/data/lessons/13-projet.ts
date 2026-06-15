@@ -6,19 +6,34 @@ export const lesson: Lesson = {
   title: "Page perso complète",
   xp: 80,
   concept: {
-    text: `Dernier défi ! Tu as découvert HTML, CSS et JavaScript. Pour ce projet final, tu vas écrire un petit programme **JavaScript** qui génère le contenu d'une mini page de présentation.
+    text: `Dernier défi, et pas des moindres ! Tu as parcouru **tout le chemin** : variables, conditions, boucles, fonctions, listes, dictionnaires, fichiers, puis HTML, CSS et JavaScript. Énorme. 🎉
 
-Pas de QCM : c'est le moment de montrer tout ce que tu as appris.
+Pour ce projet final, tu vas écrire un petit programme **JavaScript** qui se présente : ton prénom, ton âge, tes hobbies. Tu vas réutiliser **tout ce que tu sais** dans un seul code.
 
-Clique sur **Ouvrir l'exercice** pour commencer.`,
+Pas de QCM : c'est ton « épreuve finale ». Un code de départ t'attend, et la correction se débloque après 2 essais si tu coinces.
+
+**Ce que tu vas mobiliser**
+- des **variables** (prénom, âge, liste de hobbies)
+- une **fonction** qui fabrique une phrase
+- une **boucle** pour afficher chaque hobby
+- une **condition** (majeur / mineur)
+
+Clique sur **Ouvrir l'exercice** pour relever le défi.`,
     analogy:
-      "C'est ton diplôme : un projet libre où tu assembles toutes les briques apprises depuis le début.",
+      "C'est ton diplôme de fin de parcours : un projet libre où tu assembles, tout seul, toutes les briques apprises depuis la première leçon.",
   },
   codeExample: {
+    title: "Le style de code attendu (JavaScript)",
     language: "javascript",
-    code: `// Tu vas combiner variables, fonction, condition et boucle
-// en JavaScript pour produire une présentation personnalisée.`,
-    output: `(à toi de jouer dans l'exercice)`,
+    code: `let prenom = "Alex";
+let age = 20;
+
+function presentation(prenom, age) {
+  return "Je m'appelle " + prenom + " et j'ai " + age + " ans.";
+}
+
+console.log(presentation(prenom, age));`,
+    output: `Je m'appelle Alex et j'ai 20 ans.`,
   },
   quiz: [],
   exerciseId: "ex-13",

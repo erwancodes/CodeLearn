@@ -7,6 +7,21 @@ export type QuizQuestion = {
   explanation: string;
 };
 
+export type CodeLang =
+  | "python"
+  | "html"
+  | "css"
+  | "javascript"
+  | "bash"
+  | "dockerfile";
+
+export type CodeSample = {
+  title?: string; // Titre optionnel affiché au-dessus de l'exemple
+  language: CodeLang;
+  code: string;
+  output: string;
+};
+
 export type Lesson = {
   id: string;
   moduleId: string;
@@ -16,11 +31,8 @@ export type Lesson = {
     text: string; // Markdown léger
     analogy: string; // Analogie courte affichée dans une box
   };
-  codeExample: {
-    language: "python" | "html" | "css" | "javascript" | "bash" | "dockerfile";
-    code: string;
-    output: string;
-  };
+  codeExample: CodeSample;
+  examples?: CodeSample[]; // Exemples supplémentaires (optionnel)
   quiz: QuizQuestion[];
   exerciseId?: string;
 };
