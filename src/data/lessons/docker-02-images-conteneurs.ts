@@ -6,27 +6,62 @@ export const lesson: Lesson = {
   title: "Image vs conteneur",
   xp: 25,
   concept: {
-    text: `Dans Docker, il y a deux mots à ne pas confondre : l'**image** et le **conteneur**.
+    text: `Dans Docker, il y a **deux mots** à ne surtout pas confondre : l'**image** et le **conteneur**. C'est LA notion clé.
 
-- Une **image**, c'est le **plan de la boîte** : la recette figée qui décrit ce qu'il y a dedans. On ne l'utilise pas directement, on s'en sert pour fabriquer des boîtes.
-- Un **conteneur**, c'est une **boîte réelle** créée à partir d'une image, qui tourne pour de vrai.
+**L'image = le plan figé de la boîte**
 
-Avec **une seule image**, on peut créer **plusieurs conteneurs** identiques. Pratique quand un site a plein de visiteurs : on lance plusieurs boîtes pareilles pour tenir la charge.
+Une **image**, c'est la **recette** complète, gelée, qui décrit ce qu'il y a dans la boîte (le programme, ses outils, ses réglages). On ne s'en sert pas directement : c'est un **modèle** qui sert à fabriquer des boîtes.
 
-On télécharge des images toutes prêtes depuis le **Docker Hub** (une sorte de bibliothèque en ligne) avec \`docker pull\`.`,
+**Le conteneur = la boîte réelle qui tourne**
+
+Un **conteneur**, c'est une **boîte concrète** créée à partir d'une image, et qui s'exécute pour de vrai.
+
+**1 image → autant de conteneurs qu'on veut**
+
+Avec **une seule** image, on peut créer **plein** de conteneurs identiques. Très pratique : si un site web a énormément de visiteurs, on lance plusieurs boîtes identiques pour répartir la charge.
+
+**Où trouve-t-on des images ?**
+
+Sur le **Docker Hub** : une immense bibliothèque en ligne d'images toutes prêtes (Python, un serveur web, une base de données…). On en télécharge une avec \`docker pull\`.
+
+**Le cycle complet**
+1. \`docker pull\` → je récupère une **image** depuis le Docker Hub.
+2. \`docker run\` → je crée un **conteneur** à partir de cette image et je le lance.`,
     analogy:
-      "Une image, c'est le moule à gâteaux. Un conteneur, c'est le gâteau que tu sors du moule. Avec un seul moule (image), tu peux faire autant de gâteaux (conteneurs) que tu veux, tous identiques.",
+      "Une image, c'est le moule à gâteaux. Un conteneur, c'est le gâteau que tu sors du moule. Avec un seul moule (l'image), tu peux faire autant de gâteaux (les conteneurs) que tu veux, tous identiques. Le Docker Hub, c'est le magasin où tu achètes des moules tout prêts.",
   },
   codeExample: {
+    title: "Télécharger une image, puis lancer un conteneur",
     language: "bash",
-    code: `# 1. Télécharger une image toute prête (ici le serveur web nginx)
+    code: `# 1. Récupérer l'image du serveur web nginx
 docker pull nginx
 
 # 2. Créer et démarrer un conteneur à partir de cette image
 docker run nginx`,
-    output: `nginx: image téléchargée depuis le Docker Hub
-Un conteneur démarre : le serveur web tourne maintenant dans sa boîte.`,
+    output: `nginx : image téléchargée depuis le Docker Hub.
+Un conteneur démarre : le serveur web tourne dans sa boîte.`,
   },
+  examples: [
+    {
+      title: "Une seule image, plusieurs conteneurs",
+      language: "bash",
+      code: `docker pull nginx     # 1 image
+
+docker run -d nginx   # conteneur 1
+docker run -d nginx   # conteneur 2
+docker run -d nginx   # conteneur 3`,
+      output: `3 conteneurs lancés à partir de la MÊME image.
+Ils sont identiques mais indépendants.`,
+    },
+    {
+      title: "Voir les images que tu as téléchargées",
+      language: "bash",
+      code: `docker images`,
+      output: `REPOSITORY   TAG       SIZE
+nginx        latest    187MB
+python       3.12      1.02GB`,
+    },
+  ],
   quiz: [
     {
       question: "Quelle est la bonne comparaison ?",
@@ -58,6 +93,19 @@ Un conteneur démarre : le serveur web tourne maintenant dans sa boîte.`,
       correctIndex: 1,
       explanation:
         "`docker pull` récupère une image toute prête depuis la bibliothèque en ligne (Docker Hub).",
+    },
+    {
+      question: "Comment s'appelle la bibliothèque en ligne d'images toutes prêtes ?",
+      options: ["le Docker Store", "le Docker Hub", "GitHub", "le Cloud"],
+      correctIndex: 1,
+      explanation: "Le **Docker Hub** héberge des milliers d'images prêtes à l'emploi.",
+    },
+    {
+      question: "Quelle commande affiche la liste des images téléchargées sur ta machine ?",
+      options: ["docker ps", "docker list", "docker images", "docker show"],
+      correctIndex: 2,
+      explanation:
+        "`docker images` liste les images présentes. (`docker ps`, lui, liste les conteneurs qui tournent.)",
     },
   ],
 };

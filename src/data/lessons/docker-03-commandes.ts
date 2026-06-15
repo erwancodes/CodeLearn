@@ -6,33 +6,66 @@ export const lesson: Lesson = {
   title: "Les commandes de base",
   xp: 25,
   concept: {
-    text: `Pour piloter tes boîtes, tu tapes des commandes qui commencent toutes par \`docker\`. En voici 4 à connaître :
+    text: `Pour piloter tes boîtes, tu tapes des commandes dans le terminal. Elles commencent **toutes** par le mot \`docker\`, suivi de l'action à faire.
 
-- \`docker run <image>\` : créer et **démarrer** une boîte.
-- \`docker ps\` : voir la **liste des boîtes en train de tourner**.
+**Les 4 commandes indispensables**
+
+- \`docker run <image>\` : **créer et démarrer** une boîte à partir d'une image.
+- \`docker ps\` : afficher la **liste des boîtes en train de tourner**.
 - \`docker stop <nom>\` : **arrêter** une boîte.
 - \`docker rm <nom>\` : **supprimer** une boîte arrêtée.
 
-Une option très utile : \`-p\`. Elle **branche un port** de ta boîte sur ton ordinateur, pour pouvoir accéder à l'appli depuis ton navigateur.
+**Astuce :** chaque conteneur reçoit un **nom rigolo** au hasard (genre \`joyeux_tesla\`) et un identifiant. Tu utilises ce nom (ou l'identifiant) pour l'arrêter ou le supprimer.
 
-Par exemple \`-p 8080:80\` veut dire : « ce qui arrive sur le port 8080 de mon PC, envoie-le sur le port 80 de la boîte ».`,
+**L'option \`-p\` : brancher un port**
+
+Une boîte est isolée : par défaut, tu ne peux pas accéder à ce qui tourne dedans depuis ton navigateur. L'option \`-p\` crée un **branchement** entre un port de ton ordinateur et un port de la boîte.
+
+\`\`\`bash
+docker run -p 8080:80 nginx
+\`\`\`
+
+Ça veut dire : « ce qui arrive sur le port **8080** de mon PC, envoie-le vers le port **80** de la boîte ». Tu peux alors ouvrir \`http://localhost:8080\` dans ton navigateur.
+
+**L'option \`-d\` : tourner en arrière-plan**
+
+\`-d\` (*detached*) lance la boîte **en arrière-plan**, pour que ton terminal reste libre.`,
     analogy:
-      "Gère tes conteneurs comme des consoles de jeu : `run` = en allumer une, `ps` = voir lesquelles sont allumées, `stop` = l'éteindre, `rm` = la ranger au placard. Le `-p`, c'est le câble qui relie la console à la télé pour voir l'image.",
+      "Gère tes conteneurs comme des consoles de jeu : `run` = en allumer une, `ps` = voir lesquelles sont allumées, `stop` = en éteindre une, `rm` = la ranger au placard. L'option `-p`, c'est le câble HDMI qui relie la console à la télé : sans lui, la console tourne mais tu ne vois rien à l'écran.",
   },
   codeExample: {
+    title: "Démarrer un serveur web et voir les boîtes actives",
     language: "bash",
-    code: `# Démarrer un serveur web accessible sur http://localhost:8080
-docker run -p 8080:80 nginx
+    code: `# Démarrer nginx, accessible sur http://localhost:8080
+docker run -d -p 8080:80 nginx
 
-# Dans un autre terminal : voir les boîtes qui tournent
-docker ps
-
-# Arrêter puis supprimer la boîte nommée "joyeux_tesla"
+# Voir les boîtes qui tournent
+docker ps`,
+    output: `CONTAINER ID   IMAGE   STATUS         PORTS                    NAMES
+a1b2c3d4e5f6   nginx   Up 12 seconds  0.0.0.0:8080->80/tcp     joyeux_tesla`,
+  },
+  examples: [
+    {
+      title: "Arrêter puis supprimer une boîte",
+      language: "bash",
+      code: `# On utilise le nom du conteneur
 docker stop joyeux_tesla
 docker rm joyeux_tesla`,
-    output: `CONTAINER ID   IMAGE   STATUS         PORTS                  NAMES
-a1b2c3d4e5f6   nginx   Up 12 seconds  0.0.0.0:8080->80/tcp   joyeux_tesla`,
-  },
+      output: `joyeux_tesla
+joyeux_tesla
+(la boîte est arrêtée, puis supprimée)`,
+    },
+    {
+      title: "Comprendre l'option -p",
+      language: "bash",
+      code: `# Port de MON PC : 3000  ->  port de la BOÎTE : 80
+docker run -p 3000:80 nginx
+
+# Ensuite, dans le navigateur : http://localhost:3000`,
+      output: `Le site de la boîte est maintenant
+accessible sur http://localhost:3000`,
+    },
+  ],
   quiz: [
     {
       question: "Quelle commande affiche la liste des conteneurs en cours d'exécution ?",
@@ -50,7 +83,7 @@ a1b2c3d4e5f6   nginx   Up 12 seconds  0.0.0.0:8080->80/tcp   joyeux_tesla`,
       ],
       correctIndex: 1,
       explanation:
-        "`-p` branche un port de ta machine sur un port du conteneur pour y accéder.",
+        "`-p` branche un port de ta machine sur un port du conteneur pour pouvoir y accéder.",
     },
     {
       question: "Quelle commande arrête une boîte qui tourne ?",
@@ -58,6 +91,24 @@ a1b2c3d4e5f6   nginx   Up 12 seconds  0.0.0.0:8080->80/tcp   joyeux_tesla`,
       correctIndex: 2,
       explanation:
         "`docker stop <nom>` arrête proprement le conteneur. `docker rm` sert ensuite à le supprimer.",
+    },
+    {
+      question: "Par quel mot commencent toutes ces commandes ?",
+      options: ["run", "docker", "container", "sudo"],
+      correctIndex: 1,
+      explanation: "Toutes les commandes commencent par `docker`, suivi de l'action.",
+    },
+    {
+      question: "À quoi sert l'option `-d` dans `docker run -d nginx` ?",
+      options: [
+        "À supprimer la boîte ensuite",
+        "À lancer la boîte en arrière-plan",
+        "À afficher des détails",
+        "À désactiver Internet",
+      ],
+      correctIndex: 1,
+      explanation:
+        "`-d` (*detached*) fait tourner le conteneur en arrière-plan et libère ton terminal.",
     },
   ],
 };
