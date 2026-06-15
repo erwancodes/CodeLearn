@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useProgress } from "./store/useProgress";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Onboarding from "./pages/Onboarding";
 import Home from "./pages/Home";
 import Module from "./pages/Module";
@@ -95,6 +96,7 @@ export default function App() {
         />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
   Check,
   Layers,
   ChevronRight,
+  Heart,
 } from "lucide-react";
 import { useProgress } from "../store/useProgress";
 import { MODULES } from "../data/modules";
@@ -391,9 +392,18 @@ export default function Landing() {
       {/* ---------- FOOTER ---------- */}
       <footer className="border-t border-slate-200">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:px-6">
-          <span className="flex items-center gap-2">
-            <Code2 className="h-4 w-4" strokeWidth={2} />
-            CodeLearn — apprendre à coder, simplement.
+          <span className="flex items-center gap-1.5">
+            Développé avec
+            <Heart className="h-4 w-4 fill-red-500 text-red-500" />
+            par
+            <a
+              href="https://erwancodes.me"
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-brand-600 transition hover:underline"
+            >
+              Erwan
+            </a>
           </span>
           <a
             href="https://github.com/erwancodes/CodeLearn"
