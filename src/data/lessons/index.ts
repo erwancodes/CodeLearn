@@ -13,6 +13,10 @@ import l10 from "./10-html";
 import l11 from "./11-css";
 import l12 from "./12-js";
 import l13 from "./13-projet";
+import d01 from "./docker-01-cest-quoi";
+import d02 from "./docker-02-images-conteneurs";
+import d03 from "./docker-03-commandes";
+import d04 from "./docker-04-dockerfile";
 
 export const LESSONS: Lesson[] = [
   l01,
@@ -28,6 +32,10 @@ export const LESSONS: Lesson[] = [
   l11,
   l12,
   l13,
+  d01,
+  d02,
+  d03,
+  d04,
 ];
 
 const LESSON_MAP: Record<string, Lesson> = Object.fromEntries(

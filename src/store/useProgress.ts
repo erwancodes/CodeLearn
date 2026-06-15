@@ -146,6 +146,8 @@ export const useProgress = create<State>()(
         set({ progress: initialProgress }),
 
       isModuleUnlocked: (moduleId) => {
+        const mod = getModule(moduleId);
+        if (mod?.special) return true; // module bonus toujours ouvert
         const previous = getPreviousModule(moduleId);
         if (!previous) return true; // premier module toujours ouvert
         return !!get().progress.modules[previous.id]?.completed;

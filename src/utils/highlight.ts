@@ -14,6 +14,14 @@ const KEYWORDS: Record<string, string[]> = {
   ],
   css: [],
   html: [],
+  bash: [
+    "docker", "run", "build", "ps", "stop", "start", "rm", "rmi", "images",
+    "pull", "push", "exec", "logs", "compose", "up", "down",
+  ],
+  dockerfile: [
+    "FROM", "RUN", "CMD", "COPY", "ADD", "WORKDIR", "EXPOSE", "ENV",
+    "ENTRYPOINT", "ARG", "LABEL", "VOLUME",
+  ],
 };
 
 function escapeHtml(s: string): string {
@@ -51,8 +59,10 @@ export function highlight(code: string, language: string): string {
       .replace(/([a-z-]+)(\s*:)/g, (_m, p, s) => span(C.keyword, p) + s);
   }
 
-  // python / javascript : ligne par ligne pour gérer les commentaires.
-  const commentToken = language === "python" ? "#" : "//";
+  // python / javascript / bash / dockerfile : ligne par ligne pour les commentaires.
+  const hashComment =
+    language === "python" || language === "bash" || language === "dockerfile";
+  const commentToken = hashComment ? "#" : "//";
   const keywords = KEYWORDS[language] ?? [];
   const kwRegex = keywords.length
     ? new RegExp(`\\b(${keywords.join("|")})\\b`, "g")

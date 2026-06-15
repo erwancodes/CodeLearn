@@ -17,7 +17,7 @@ export type Lesson = {
     analogy: string; // Analogie courte affichée dans une box
   };
   codeExample: {
-    language: "python" | "html" | "css" | "javascript";
+    language: "python" | "html" | "css" | "javascript" | "bash" | "dockerfile";
     code: string;
     output: string;
   };
@@ -42,6 +42,7 @@ export type ModuleDef = {
   description: string;
   order: number;
   lessonIds: string[];
+  special?: boolean; // Module bonus toujours déverrouillé
 };
 
 // --- localStorage shapes (cf. PRD) ---

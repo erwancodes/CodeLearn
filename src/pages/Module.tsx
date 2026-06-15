@@ -34,7 +34,7 @@ export default function Module() {
 
       <div className="mb-6">
         <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-          Module {mod.order}
+          {mod.special ? "★ Module spécial" : `Module ${mod.order}`}
         </span>
         <div className="flex items-center gap-3">
           <h1 className="text-3xl font-bold">{mod.title}</h1>

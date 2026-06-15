@@ -32,6 +32,20 @@ export const MODULES: ModuleDef[] = [
     order: 3,
     lessonIds: ["10-html", "11-css", "12-js", "13-projet"],
   },
+  {
+    id: "module-special",
+    title: "Module Spécial : Docker",
+    description:
+      "Docker expliqué tout simplement : mets une appli dans une boîte qui marche partout. Accessible à tout moment, aucune base requise.",
+    order: 4,
+    special: true,
+    lessonIds: [
+      "docker-01-cest-quoi",
+      "docker-02-images-conteneurs",
+      "docker-03-commandes",
+      "docker-04-dockerfile",
+    ],
+  },
 ];
 
 export function getModule(moduleId: string): ModuleDef | undefined {

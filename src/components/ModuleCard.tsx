@@ -26,9 +26,15 @@ export default function ModuleCard({ module }: { module: ModuleDef }) {
             <BookOpen className="h-5 w-5" />
           )}
         </span>
-        <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
-          Module {module.order}
-        </span>
+        {module.special ? (
+          <span className="rounded-full bg-violet-100 px-2.5 py-0.5 text-xs font-bold uppercase tracking-wide text-violet-700 dark:bg-violet-500/15 dark:text-violet-300">
+            ★ Spécial
+          </span>
+        ) : (
+          <span className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+            Module {module.order}
+          </span>
+        )}
       </div>
 
       <h3 className="text-lg font-bold">{module.title}</h3>
