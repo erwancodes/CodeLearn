@@ -9,6 +9,7 @@ import Lesson from "./pages/Lesson";
 import Exercise from "./pages/Exercise";
 import WebBuilder from "./pages/WebBuilder";
 import Settings from "./pages/Settings";
+import DevPanel from "./pages/DevPanel";
 
 // Garde : redirige vers l'onboarding tant qu'aucun prénom n'est saisi.
 function RequireUser({ children }: { children: React.ReactNode }) {
@@ -76,6 +77,14 @@ export default function App() {
           element={
             <RequireUser>
               <Settings />
+            </RequireUser>
+          }
+        />
+        <Route
+          path="/dev"
+          element={
+            <RequireUser>
+              <DevPanel />
             </RequireUser>
           }
         />

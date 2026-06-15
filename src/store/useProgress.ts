@@ -47,6 +47,13 @@ type State = {
   ) => { xpGained: number };
   resetAll: () => void;
 
+  // --- panneau dev / triche ---
+  devAddXP: (amount: number) => void;
+  devSetXP: (amount: number) => void;
+  devSetStreak: (n: number) => void;
+  devCompleteModule: (moduleId: string) => void;
+  devCompleteAll: () => void;
+
   // --- sélecteurs dérivés ---
   isModuleUnlocked: (moduleId: string) => boolean;
   isModuleCompleted: (moduleId: string) => boolean;
@@ -66,6 +73,33 @@ function recomputeModuleCompletion(progress: Progress): Progress {
     modules[mod.id] = { ...mp, completed: allDone };
   }
   return { ...progress, modules };
+}
+
+// Marque toutes les leçons d'un module comme complétées (utilisé par le panneau dev).
+function completeModulePure(progress: Progress, moduleId: string): Progress {
+  const mod = getModule(moduleId);
+  if (!mod) return progress;
+  const mp = progress.modules[moduleId] ?? { completed: false, lessons: {} };
+  const lessons = { ...mp.lessons };
+  let xpAdd = 0;
+  for (const lid of mod.lessonIds) {
+    if (!lessons[lid]?.completed) {
+      const l = getLesson(lid);
+      xpAdd += l?.xp ?? 0;
+      lessons[lid] = {
+        completed: true,
+        score: 100,
+        attempts: (lessons[lid]?.attempts ?? 0) + 1,
+        completedAt: lessons[lid]?.completedAt ?? new Date().toISOString(),
+      };
+    }
+  }
+  const next: Progress = {
+    ...progress,
+    modules: { ...progress.modules, [moduleId]: { ...mp, lessons } },
+    totalXP: progress.totalXP + xpAdd,
+  };
+  return recomputeModuleCompletion(next);
 }
 
 export const useProgress = create<State>()(
@@ -144,6 +178,39 @@ export const useProgress = create<State>()(
 
       resetAll: () =>
         set({ progress: initialProgress }),
+
+      // --- panneau dev / triche ---
+      devAddXP: (amount) =>
+        set((s) => ({
+          progress: {
+            ...s.progress,
+            totalXP: Math.max(0, s.progress.totalXP + amount),
+          },
+        })),
+
+      devSetXP: (amount) =>
+        set((s) => ({
+          progress: { ...s.progress, totalXP: Math.max(0, Math.round(amount)) },
+        })),
+
+      devSetStreak: (n) =>
+        set((s) => ({
+          progress: {
+            ...s.progress,
+            streak: Math.max(0, Math.round(n)),
+            lastActiveDate: s.progress.lastActiveDate || todayISO(),
+          },
+        })),
+
+      devCompleteModule: (moduleId) =>
+        set((s) => ({ progress: completeModulePure(s.progress, moduleId) })),
+
+      devCompleteAll: () =>
+        set((s) => {
+          let p = s.progress;
+          for (const m of MODULES) p = completeModulePure(p, m.id);
+          return { progress: p };
+        }),
 
       isModuleUnlocked: (moduleId) => {
         const mod = getModule(moduleId);
