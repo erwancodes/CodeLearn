@@ -18,7 +18,9 @@ sauvegardée dans le navigateur (`localStorage`). L'app fonctionne hors ligne
 
 - **3 modules progressifs** — Les bases (variables, conditions, boucles, fonctions),
   Structures de données (listes, dictionnaires, fichiers), et le Web (HTML, CSS, JS).
-- **13 leçons** avec concept, analogie, exemple de code coloré, résultat attendu et QCM.
+- **Module Spécial Docker** ★ — bonus toujours accessible, qui explique les conteneurs
+  avec des analogies simples (compréhensible dès 15 ans).
+- **17 leçons** avec concept, analogie, exemple de code coloré, résultat attendu et QCM.
 - **Éditeur de code exécutable** : Python via [Pyodide](https://pyodide.org/),
   JavaScript en natif. Console de sortie avec gestion des erreurs.
 - **Système de progression** : XP, niveaux (Débutant → Senior), *streak* quotidien.
