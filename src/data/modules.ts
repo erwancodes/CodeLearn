@@ -60,11 +60,40 @@ export const MODULES: ModuleDef[] = [
     ],
   },
   {
+    id: "module-6",
+    title: "JavaScript : rends ta page vivante",
+    description:
+      "Le JavaScript débarque dans l'atelier ! Réagis aux clics, compte, affiche/cache, et crée tes premières pages interactives.",
+    order: 6,
+    lessonIds: [
+      "23-js-clic",
+      "24-js-compteur",
+      "25-js-afficher-cacher",
+      "26-js-projet",
+    ],
+  },
+  {
+    id: "module-7",
+    title: "Crée un mini-jeu",
+    description:
+      "Programme de vrais petits jeux dans le navigateur : cliqueur, quiz, et pierre-feuille-ciseaux contre l'ordinateur.",
+    order: 7,
+    lessonIds: ["27-jeu-clicker", "28-jeu-quiz", "29-jeu-projet"],
+  },
+  {
+    id: "module-8",
+    title: "Le défi final",
+    description:
+      "Le boss de fin : une landing page pro, une to-do list interactive, et ton site complet stylé et animé.",
+    order: 8,
+    lessonIds: ["30-defi-landing", "31-defi-todo", "32-defi-final"],
+  },
+  {
     id: "module-special",
     title: "Module Spécial : Docker",
     description:
       "Docker expliqué tout simplement : mets une appli dans une boîte qui marche partout. Accessible à tout moment, aucune base requise.",
-    order: 6,
+    order: 9,
     special: true,
     lessonIds: [
       "docker-01-cest-quoi",

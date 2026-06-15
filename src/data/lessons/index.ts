@@ -22,6 +22,16 @@ import l19 from "./19-boutons-hover";
 import l20 from "./20-cartes-degrades";
 import l21 from "./21-animations";
 import l22 from "./22-projet-portfolio";
+import l23 from "./23-js-clic";
+import l24 from "./24-js-compteur";
+import l25 from "./25-js-afficher-cacher";
+import l26 from "./26-js-projet";
+import l27 from "./27-jeu-clicker";
+import l28 from "./28-jeu-quiz";
+import l29 from "./29-jeu-projet";
+import l30 from "./30-defi-landing";
+import l31 from "./31-defi-todo";
+import l32 from "./32-defi-final";
 import d01 from "./docker-01-cest-quoi";
 import d02 from "./docker-02-images-conteneurs";
 import d03 from "./docker-03-commandes";
@@ -50,6 +60,16 @@ export const LESSONS: Lesson[] = [
   l20,
   l21,
   l22,
+  l23,
+  l24,
+  l25,
+  l26,
+  l27,
+  l28,
+  l29,
+  l30,
+  l31,
+  l32,
   d01,
   d02,
   d03,

@@ -27,6 +27,7 @@ export type WebBuilderSpec = {
   statement: string; // Énoncé / consignes (markdown léger)
   html: string; // Code HTML de départ
   css: string; // Code CSS de départ
+  js?: string; // Code JS de départ (optionnel) : active l'onglet JavaScript
 };
 
 export type Lesson = {
