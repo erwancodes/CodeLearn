@@ -16,7 +16,7 @@ import Landing from "./pages/Landing";
 // Garde : redirige vers l'onboarding tant qu'aucun prénom n'est saisi.
 function RequireUser({ children }: { children: React.ReactNode }) {
   const username = useProgress((s) => s.settings.username);
-  if (!username) return <Navigate to="/" replace />;
+  if (!username) return <Navigate to="/onboarding" replace />;
   return <>{children}</>;
 }
 
@@ -33,9 +33,10 @@ export default function App() {
     <div className="min-h-screen">
       <Navbar />
       <Routes>
-        <Route path="/" element={<Onboarding />} />
+        <Route path="/" element={<Navigate to="/landing" replace />} />
         <Route path="/landing" element={<Landing />} />
         <Route path="/welcome" element={<Landing />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route
           path="/dashboard"
           element={
